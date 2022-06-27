@@ -82,7 +82,8 @@ header.btnMenu {
   display: block;
   width: 100%;
   height : 100%
-  object-fit : fill;
+  object-fit: fill;
+  border: 1px solid #000
 }
 
 /* 반응형 웹  - 개발자툴에서 확인 가능 - 모바일 화면 전환시 btn 메뉴만 노출*/
