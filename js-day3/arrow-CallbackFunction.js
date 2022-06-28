@@ -29,7 +29,7 @@ console.log(account(2,1, minus)); // 함수를 가리키는 주소번지을 넘�
 console.log(account(2,1, multiply));
 
 
-// 즉시 실행 함수
+// 즉시 실행 함수 IIFE
 
 
 /*
