@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script defer src="operator.js"></script>
+  <!-- 파싱을 하다가 js를 만나면 명령만 내려놓고 HTML파싱이 끝난후에
+  마지막에 자스를 실행하게됨 ** 가장 좋은 방법 **   -->
+
+  <!-- <script src="main.js"></script> -->
+  <!-- parsing HTML > fetching js > executing js > parsing HTML -->
+  <!-- 1. 위와같이 헤드태그안에 스크립트를 포함하게되면 
+  브라우저가 한줄한줄씩 분석하고 이해한 것을 CSS 병합해서 DOM요소로 변환!!
+  but 이 방법의 단점은 인터넷이 느리거나 js파일이 큰 경우 로딩이 오래걸림 -->
+</head>
+<body>
+  <!--  <script src="main.js"></script> -->
+  <!-- 2. 바디태그 안에 포함하는 경우, 쭉 파싱을 하다가 스크립트를 만나면
+  서버에서 js를 받아오고 실행을 하게됨. HTML파싱이 먼저 일어나기 때문에
+  사용자가 페이지를 먼저 확인할 수 있는 장점이 있긴하지만 js 실행까지 기다리는 단점 -->
+</body>
+</html>
