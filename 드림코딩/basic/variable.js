@@ -42,10 +42,12 @@ const maxNumber = 5;
 
 
 // Variable types
+// 메모리에 값이 저장되는 2가지 방식
 // 1) primitive : 값 자체가 메모리에 저장됨
 // 2) object : 너무 커서 메모리에 한번에 올라가지 못함, 오브젝트가 가리키는 reference가 메모리를 가리키게 됨.
 //          오브젝트가 가리키는 reference가 메모리에 저장된다
-// 
+//        const yeojin = {name: 'yeojin', age: 29}; >> yeojin이 가리키는 포인터가 잠기기 때문에 
+//         yeojin은 다른 객체로 변경 불가하지만, name과 age는 계속 변경 가능
 
 // object, real-life object, data structure
 const yeojin = {name: 'yeojin', age: 29}; // const로 할당되었기 때문에 다른 object로 할당 불가
