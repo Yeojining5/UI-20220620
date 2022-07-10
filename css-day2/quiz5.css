@@ -6,9 +6,9 @@
     .container {
       width: 1080px;
       margin: 0 auto; /* 화면 중앙에 배치 */
-      margin-bottom: 8px; /* 아래 요소들과의 간격 -left, right */
+      margin-bottom: 10px; /* 아래 요소들과의 간격 -left, right */
       /* 잘리는 부분이 안쪽으로 들어오게됨. 위에 있던footer가 들어옴 */
-      overflow: hidden; 
+      overflow:hidden;  /* 부모요소의 범위를 넘어가는 자식요소의 부분은 보이지 않도록 처리함 */
     }
     ul.gnb 
     {

@@ -152,11 +152,3 @@ const simpleMultiply = (a,b) => {
 
 
 
-
-
-
-
-/* Quiz */
-function calculate(command, a, b){
-  if(command == )
-}
