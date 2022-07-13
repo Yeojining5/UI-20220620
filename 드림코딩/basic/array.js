@@ -27,7 +27,7 @@ for (let fruit of fruits) {
 
 // c. forEach 
 // API 확인할 것! - 파라미터로 (value, index, array)를 넘긴다 
-// + 보통 array는 받아오지 않으므로 생략\
+// + 보통 array는 받아오지 않으므로 생략
 
 fruits.forEach(function(fruit, index) {
   console.log(fruit, index);
@@ -61,3 +61,21 @@ fruits.shift();
 console.log(fruits);
 
 // shift, unshift는 pop push보다 느리다!!
+
+// splice : remove an item by index position
+// slice(시작하는 인덱스번호, 지울 개수);
+fruits.push('🍇', '🍑');
+console.log(fruits);
+fruits.splice(1,1);
+console.log(fruits);
+// ['🍉', '🍅', '🍇', '🍑'] > ['🍉', '🍇', '🍑'] 인덱스1이었던 토마토가 지워짐
+
+fruits.splice(1, 1, '🥝', '🍓'); // 지운자리에 키위랑 딸기를 추가해라
+console.log(fruits); // 포토를 지우고 키위 딸기가 들어감 ['🍉', '🥝', '🍓', '🍑']
+
+// combine two arrays
+const fruits2 = ['🍍','🍈'];
+const newFruits = fruits.concat(fruits2);
+console.log(newFruits); // ['🍉', '🥝', '🍓', '🍑', '🍍', '🍈']
+
+console.log(fruits.indexOf('🍉'));

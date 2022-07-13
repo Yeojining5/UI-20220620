@@ -23,6 +23,7 @@ fetch(NEW_URL, requestOptions)
   .then(result => {
     console.log(result);
     const ul = document.createElement("ul");
+    
     for(let i=0;i<10;i++){
       const div = document.createElement("div");
       div.innerHTML = `

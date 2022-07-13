@@ -22,7 +22,19 @@ function getNewsList(){
   .then(response => response.json())
   .then(result => {
     const newsList = [];
-    newsList.push("<ul>");
+    // 분산되었던 얘들을 한군데로 모아주는 문자열들..
+    let template = `
+      <div>
+        <h1>Hacker News</h1>
+        <ul>
+          {{__news_list__}}
+        </ul>
+        <div>
+          <a href="#/page/{{__prev_page__}}">이전페이지</a>
+          <a href="#/page/{{__next_page__}}">다음페이지</a>
+        </div>
+      </div>
+    `;
     ////////////////////////////// insert here - 페이징 처리를 고려한 for문으로 변경 !!!
     for(let i=(store.currentPage-1) * 10; i < store.currentPage * 10; i++){
     //for(let i=0;i<30;i++){
@@ -34,31 +46,10 @@ function getNewsList(){
       </li>
       `);
       } ////////////////// end of for
-      newsList.push("</ul>");
-        /////////////////////////insert here[이전페이지: 현페에서 -1을함] - #/pare/이동할 페이지 번호
-        // 삼항연산자 -> 조건문 ? 참일때 : 거짓일때
-        // 조건문 ? 현페-1 : 1
-
-        /////////////////////////insert here[다음페이지: 현페에서 +1을함] - #/pare/이동할 페이지 번호
-        newsList.push(`
-        <div>
-          <a href="#/page/${store.currentPage > 1 ? store.currentPage - 1: 1}">이전페이지</a>
-          <a href="#/page/${store.currentPage + 1}">다음페이지</a>
-        </div>
-        `);
-        /* 
-        
-        <div>
-          <a href="#/page/현페 >1 ? 현페-1 : 1"> 이전페이지 </a>
-          <a href="#/page/현페+1"> 다음페이지 </a>
-        </div>
-
-        */
-        
-        
-        container.innerHTML = newsList.join("");
-        // container.appendChild(ul);
-        // container.appendChild(content);
+      template = template.replace("{{__news_list__}}", newsList.join(""));
+      template = template.replace("{{__prev_page__}}", store.currentPage > 1 ? store.currentPage -1 : 1);
+      template = template.replace("{{__next_page__}}", store.currentPage + 1);
+      container.innerHTML = template;
   })
       .catch(error => console.log('error', error));
 } /////////////////// end of getNewsList()
