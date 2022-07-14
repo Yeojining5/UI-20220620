@@ -1,4 +1,5 @@
-class DeptVO {
+// export 하면 외부 클래스에서 접근 가능
+export class DeptVO {
   constructor(deptno, dname, loc) {
     this.deptno = deptno;
     this.dname = dname;

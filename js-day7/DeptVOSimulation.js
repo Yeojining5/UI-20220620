@@ -5,3 +5,4 @@ const myDVO = new DeptVO(50, '개발부', '부산');
 console.log(myDVO.dname);
 console.log(myDVO.loc);
 console.log(myDVO.deptno);
+

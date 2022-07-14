@@ -17,7 +17,7 @@ console.log(c1, c2, c3);
 colors.map(function(item, i) {
   console.log(item, i);
 });
-// useState({})
+// useState({}) *** 자주 쓰이는 패턴
 // useState([])
 const dept = {
   deptno : 10,
