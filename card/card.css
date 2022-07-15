@@ -1,8 +1,9 @@
-* {
-  border: 1px dashed red; /* 가이드 라인 */
-} 
+/* * {
+  border: 1px dashed red; 
+}  */
 
 .center {
+  border: 1px dashed blue; 
   position: absolute;
   left: 50%;
   top: 50%;
@@ -10,6 +11,7 @@
 }
 
 .card {
+  border: 1px dashed red; 
   padding: 20px;
   color: #222;
   width: 280px;
@@ -22,7 +24,7 @@
   border-radius: 8px;
 }
 
-.card h1{
+.card > h1{
   font-size: 20px;
   line-height: 28px;
   font-weight: bold;
@@ -37,6 +39,7 @@
 }
 
 .card-info {
+  border: 1px dashed violet; 
   display: flex;
   flex-direction: row;
   justify-content: space-between; /* 양옆으로 퍼짐 */
