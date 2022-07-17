@@ -62,8 +62,9 @@ console.log(fruits);
 
 // shift, unshift는 pop push보다 느리다!!
 
-// splice : remove an item by index position
-// slice(시작하는 인덱스번호, 지울 개수);
+// remove an item by index position 
+// splice :(시작하는 인덱스번호, 지울 개수); -> 삭제된 아이들이 리턴됨
+// slice(인덱스 시작번호, 끝번호); *끝번호는 포함 안됨!
 fruits.push('🍇', '🍑');
 console.log(fruits);
 fruits.splice(1,1);
