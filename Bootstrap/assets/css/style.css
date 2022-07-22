@@ -1,4 +1,9 @@
 
+header {
+  z-index: 1;
+}
+
+
 .breadCrumb {
   margin-top: 8rem;
   margin-bottom: 5rem;
