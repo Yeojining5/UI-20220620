@@ -1,0 +1,19 @@
+a {
+  text-decoration: none; /* 밑줄 들어가는게 싫다 */
+  width: 100px;
+  height: 50px;
+  display: block; /* <a>는 인라인요소이기 떄문에 블락요소로 바꿔준다 */
+  background-color: aqua;
+  margin: 100px;
+  text-align: center;
+}
+
+.box {
+  width: 500px;
+  height: 500px;
+  background-color: lightskyblue;
+  margin: 100px;
+}
+
+
+

@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+
+ul {
+  color:blue;
+  list-style-type:square; 
+}
+
+/*  스타일시트 
+1) 내부 스타일 시트
+2) 외부 스타일 시트
+3) 인라인 스타일
+ex) <p style="color:blue;"> 블루베리는 항산화제인 .... </p>
+    <td style="width: 51%">공지사항 제목9</td>
+
+*/
+
+/* 태그는 말 그대로 태그 자체를 가리키는 반면,
+요소는 태그가 적용된 것을 가리킨다. */
+
+/* 특정 부분에 스타일 적용하기
+* class 선택자 - 문서 안에서 여러번 반복해 적용 가능 
+* id 선택자 - 문서 안에서 한 번만 적용 가능! */
+
+p {
+  font-size: 12px;
+  font-family: 돋움;
+  font-style: italic;
+  font-weight: bold;
+}
+/* 폰트 크키 관련
+em - 해당 글꼴의 대문자 M의 너비를 기준으로 크기 조절
+   - 모바일 기기에서 접속할 경우까지 고려한다면 em을 사용하는 것이 좋다
+ex - X-height. 해당 글꼴의 소문자 x의 높이를 기준으로 크기를 조절
+px - 픽셀. 모니터에 따라 상대적 크기가 된다
+pt - 포인트. 일반 문서에서 많이 사용하는 단위 */
+
+.container {
+  background-color: red;
+  width : 400px;
+  height: 200px;
+  margin: 0 auto; /* 가로로 중앙에 배치, inline에 적용X / div태그 or display속성을 block으로 설정 */
+}
+
+h1, h2 {
+  text-align: center; /* 텍스트 정렬 가운데 */
+}
+
+/* display
+display: block 
+> 블록 속성으로 배치. 세로로 나열
+> inline과 달리 width, height, margin, padding 모두 반영 
+> 블록요소 <div> <p> <h1> <ul> <ol> <li> <form> <table> <address>
+
+
+display: inline 
+> 인라인 속성으로 배치. 가로로 나열
+> width와 height 속성을 지정해도 무시된다. 해당 태그가 마크업하고 있는 컨텐츠의 크기만큼만 공간을 차지하도록 되어있기 때문
+> margin과 padding 속성은 좌우 간격만 반영이되고 상하 간격은 반영되지x
+> 인라인요소 <span> <img> <a> <input> <button> <label>
+
+display : inline-block 
+> inline으로 하면 너비나 높이, 마진 같은 박스 모델 값이 정확히 적용되지 않아서
+> 한 줄로 배치하면서 그 내용에는 블록 레벨 속성을 사용하고 싶을 때
+> block 요소처럼 width와 height 속성 지정 및 margin과 padding 속성의 상하 간격 지정이 가능
+> 내부적으로는 block 요소의 규칙을 따르면서 외부적으로 inline 요소의 규칙을 따르는 것
+*/
+
+/* float 속성 - 왼쪽이나 오른쪽으로 배치하기
+float : left | right | none
+*/
+.left-img {
+  float: left;
+  margin-right : 15px; /* 오른쪽에 텍스트가 오는 경우 간격을주기 위해 */
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인라인요소와 블록요소</title>
+    <style>
+        div {
+            display : block;
+            width : 300px;
+            height : 300px;
+            border : 3px solid black;
+            background-color: aquamarine;
+        }
+        div#d_2 {
+            display : block;
+            width : 300px;
+            height : 300px;
+            border : 3px solid black;
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <!-- div*2 입력후 엔터 치면 아래와같이 생성됨 / div태그는 상자이다 = 자체 태그가 있다 = 수직으로 쌓인다  -->
+    <div>Div1</div>
+    <div>Div2</div>
+    <!-- span*3 입력후 엔터 치면 아래와같이 생성됨 /  span태그 like 글자 = 수평으로 쌓인다 -->
+    <span>Span1</span>
+    <span>Span2</span>
+    <span>Span3</span>
+    <h1> 블록요소 h1</h1>
+</body>
+</html>

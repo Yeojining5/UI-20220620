@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" id="target" value="button">
+  <script>
+    const t = document.getElementById('target');
+    t.addEventListener('click', function(event) {
+      alert('Hello world, '+event.target.value); // event.target.value = button
+    }); // 'click'을 했을때 두번째 인자로 전달한 eventListener가 호출
+    // event.target -> target의 의미는 이 이벤트리스너를 호출한 이벤트 타겟, 즉 t라는 객체
+    // t의 value를 의미함. t.value = button
+  </script>
+</body>
+</html>
