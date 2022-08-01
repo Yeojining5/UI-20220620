@@ -89,9 +89,41 @@ section p {
   overflow-y: auto; /* 아이템이 늘어날때 스크롤바 생성 */
   background-color: #f1f0f1;
   border-radius: 20px;
+  list-style: none;
 }
 
+.item_name {
+  font-size : 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+}
 
+.index_ad,
+.index_t,
+.index_time,
+.index_parking {
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-decoration: underline; 
+}
+
+.item_con,
+.item_address,
+.item_tell,
+.item_parking {
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
+}
+
+.item_hour_week {
+  padding-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.item_hour_weekend {
+  margin-top: 0;
+  padding-bottom: 1rem;
+}
 
 /* *************************** */
 
@@ -126,3 +158,4 @@ section p {
   list-style: none;
   margin-top: 0.3rem;
 }
+

@@ -148,7 +148,7 @@ function createItem(text) {
     index_parking.setAttribute('class', 'index_parking');
     index_parking.innerHTML = '무료주차 안내';
     // 들어갈 무료주차 안내
-    const item_parking = document.createElement('lp');
+    const item_parking = document.createElement('p');
     item_parking.setAttribute('class','item_parking');
     item_parking.innerHTML = parking;
 

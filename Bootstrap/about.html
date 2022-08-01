@@ -16,7 +16,18 @@
     <!-- ################## fontawesome ################## -->
     <script src="https://kit.fontawesome.com/fd76fe00bf.js" crossorigin="anonymous"></script>
 
-</head>
+    <!-- ############### Kakao Map API Key ############### -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5599cb1e8550656096d38d6a365519e7&libraries=services,clusterer"></script>
+    <script>
+      var container = document.getElementById('map');
+      var options = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667),
+        level: 3
+      };
+
+      var map = new kakao.maps.Map(container, options);
+    </script>
+  </head>
 
 
 
@@ -275,55 +286,56 @@
 
         </section>
 
+        
+
         <section id="map">
           <h1 class="display-5 fw-bold">오시는 길</h1>
           <div class="divhr" style='background:#29b6f6; height:5px;'></div>
-
-          <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1581.084750946072!2d126.97336515828785!3d37.5746261449491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca294762259a1%3A0x541dbf58882c544c!2zKOyjvCnsiqTtj6zsp5A!5e0!3m2!1sko!2skr!4v1494207988510" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-                    
-                    <div class="container">
-                      <div class="row justify-content-center">
-                        <div class="col-4">
-                          <ul class="map_ul">
-                            <h5>
-                              <i class="fa-solid fa-bookmark" id="icon2"></i>
-                              강남 본점
-                            </h5>
-                            <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩</li>
-                            <li>Tell : 1544-9970</li>
-                          </ul>
-                        </div>
-                        <div class="col-4">
-                          <ul class="map_ul">
-                            <h5>
-                              <i class="fa-solid fa-bus" id="icon2"></i>
-                              버스 안내
-                            </h5>
-                            <li>역삼역.포스코P&S타워 정류장</li>
-                            <li>지선 146 / 740 / 341 / 360 </li>
-                            <li>간선 1100 / 1700 / 2000 / 7007 / 8001</li>
-                          </ul>
-                        </div>
-                        <div class="col-4">
-                          <ul class="map_ul">
-                            <h5>
-                              <i class="fa-solid fa-train-subway" id="icon2"></i>
-                              지하철 안내
-                            </h5>
-                            <li>지하철 2호선 역삼역 3번출구 100m</li>
-                            <li>지하철 2호선 강남역 1번출구 300m</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                </div>  
-            </div>
+          
+          <div class="mapcontainer">
+            <!-------------------- 카카오맵 ------------------->  
+            <div id="kakao" style="width:100%;height:500px;"></div>
+            <!-------------------------------------------------> 
           </div>
 
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-4">
+                <ul class="map_ul">
+                  <h5>
+                    <i class="fa-solid fa-bookmark" id="icon2"></i>
+                    강남 본점
+                  </h5>
+                  <li>서울특별시 강남구 테헤란로 14길 6 남도빌딩</li>
+                  <li>Tell : 02-1234-1234</li>
+                </ul>
+              </div>
+              <div class="col-4">
+                <ul class="map_ul">
+                  <h5>
+                    <i class="fa-solid fa-bus" id="icon2"></i>
+                    버스 안내
+                  </h5>
+                  <li>역삼역.포스코P&S타워 정류장</li>
+                  <li>지선 146 / 740 / 341 / 360 </li>
+                  <li>간선 1100 / 1700 / 2000 / 7007 / 8001</li>
+                </ul>
+              </div>
+              <div class="col-4">
+                <ul class="map_ul">
+                  <h5>
+                    <i class="fa-solid fa-train-subway" id="icon2"></i>
+                    지하철 안내
+                  </h5>
+                  <li>지하철 2호선 역삼역 3번출구 100m</li>
+                  <li>지하철 2호선 강남역 1번출구 300m</li>
+                </ul>
+              </div>
+            </div>
+          </div> <!-- end of div.container -->
+        
         </section>
+
 
       </main> <!-- ################## Main End ##################-->      
     </div> <!-- end of row 2행 -->
@@ -349,6 +361,29 @@
     </div>
   </footer>
   <!-- ################## Footer End ##################-->
+
+  <!-- ##################  Kakao Map ##################-->
+  <script>
+    var container = document.getElementById('kakao'); // 지도를 표시할 div
+    var options = {
+      center: new kakao.maps.LatLng(37.498997, 127.032909), // 지도의 중심 좌표
+      level: 2 // 지도 확대 레벨
+    };
+
+    var map = new kakao.maps.Map(container, options); // 지도 생성
+
+    // 마커가 표시될 위치입니다     
+    var markerPosition = new kakao.maps.LatLng(37.498997, 127.032909);
+    
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+      position: markerPosition
+    });
+    
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+  </script>
+  <!-- ###########################################-->
 
     <!-- JS -->
     <script src="about.js"></script>
