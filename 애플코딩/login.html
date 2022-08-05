@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .alert-box {
+      background: #9292e3;
+      color: black;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+  <!-- 내가 만든 초보 버전.... html div창을 여러개 만드는건 하수 
+  100개라면 언제 다 만들 것인지....? -->
+  <div class="alert-box" id="alert1">
+    <p>아이디를 입력안하셨어요</p>
+    <button onclick="alert1('none')">닫기</button>
+  </div>
+
+  <div class="alert-box" id="alert2">
+    <p>비번을 입력안하셨어요</p>
+    <button onclick="alert2('none')">닫기</button>
+  </div>
+
+  <button onclick="alert1('block')">버튼1</button>
+  <button onclick="alert2('block')">버튼2</button>
+
+  <script>
+
+    function alert1(e) {
+      document.getElementById('alert1').style.display = e;
+    }
+
+    function alert2(e) {
+      document.getElementById('alert2').style.display = e;
+    }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .alert-box {
+      background: #9292e3;
+      color: black;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+  
+  <div class="alert-box" id="alert">
+    <span id="title">Alert 박스</span>
+    <button id="close"> X </button>
+  </div>
+
+  <button onclick="알림창1열기('아이디입력해라')">버튼1</button>
+  <button onclick="알림창1열기('비번입력해라')">버튼2</button>
+
+  <script>
+    // 왼쪽에 있는 요소가 클릭되면 스코프 안에 코드를 실행해라
+    document.getElementById('close').addEventListener('click', function(){
+      document.getElementById('alert').style.display = 'none';
+    });
+
+
+    function 알림창1열기(구멍) {
+      //1. 제목바꾸기
+      document.getElementById('title').innerHTML = 구멍;
+      
+      //2. 열기
+      document.getElementById('alert').style.display = 'block';
+    }
+    
+  </script>
+
+</body>
+</html>
