@@ -1,0 +1,71 @@
+* {
+  border: 1px solid red; /* 가이드 라인 */
+  box-sizing: border-box;
+} 
+a {
+  text-decoration: none;
+}
+
+body {
+  background-color: black;
+}
+
+header {
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0px;
+  position: absolute;
+  z-index: 3;
+}
+
+header h1 {
+  margin: 0px;
+  height: 40px;
+  float: left;
+}
+
+header h1 img {
+  background-color: white;
+}
+
+.main-navigation {
+  float: right
+}
+
+.main-navigation a {
+  color: white;
+  margin-left: 20px;
+}
+
+.btn {
+  display: inline-block;
+  color: white;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-radius: 8px; /* 둥글게 */
+  background-color: blue;
+
+}
+
+.text-wrap {
+  position: absolute; /* 포지션<->z인텍스 같이 사용함 */
+  z-index: 2;
+}
+
+.video-wrap {
+  position: absolute;
+  left: 0px;
+  width: 100%; /* 좌우로 꽉차게 */
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.video-wrap video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+

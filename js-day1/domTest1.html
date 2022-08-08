@@ -1,0 +1,28 @@
+<!DOCTYPE html> <!--  선언문 생략가능 - 브라우저(크롬-V8엔진 - 구글오픈소스 - C++개발) -->
+<html lang="en"><!-- 태그명은 영문이어야 한다 -->
+<head>
+  <meta charset="UTF-8"><!-- 인코딩 타입은 다국어지원 - 리액트, AJAX, 빈태그 empty tag -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">/////
+  <title>Document</title>
+</head>
+<body>
+<!-- 주석 html, xml
+다운로드(로컬) - DOM트리 구성(브라우저가) - 인터프리터(통역) - 출력
+-->
+<script>
+  // document.write();  document는 브라우저에서 제공되는 내장객체이다 - xxx.html문서의 상위객체
+  // document의 최상위객체가 window (크롬에서 제공 = 표준이다)
+  window.onload = function(){ 
+    // onload 로딩이 다 되었을때(dom tree가 완성되었을때,,?)
+    // *** h1 노드는 태그이름이 있고 값은 없다 *** 리액트에서는 태그를 만들어씀
+    const header = document.createElement("h1");
+    // 텍스트 노드는 태그이름이 없고 값만 있다.
+    const textNode = document.createTextNode("DOM TREE");
+    // 노드를 연결합니다.
+    header.appendChild(textNode); // 연결하는 것은 append
+    document.body.appendChild(header); // header를 붙인다
+  }  
+</script>
+</body>
+</html>

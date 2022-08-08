@@ -1,0 +1,49 @@
+    * {
+      border: 1px solid black; /* 가이드 라인 */
+      box-sizing: border-box;
+    } 
+    
+    .container {
+      width: 1080px;
+      margin: 0 auto; /* 화면 중앙에 배치 */
+      margin-bottom: 10px; /* 아래 요소들과의 간격 -left, right */
+      /* 잘리는 부분이 안쪽으로 들어오게됨. 위에 있던footer가 들어옴 */
+      overflow:hidden;  /* 부모요소의 범위를 넘어가는 자식요소의 부분은 보이지 않도록 처리함 */
+    }
+    ul.gnb 
+    {
+      float: left;
+      background-color: greenyellow;
+    }
+    ul.gnb > li {
+      list-style-type : none;
+      float : left;
+      padding-left: 16px;
+    }
+    ul.rank {
+      float: right;
+      background-color: yellow;
+    }
+    ul.rank > li {
+      list-style-type : none;
+      padding-left: 0px;
+    }
+
+    .left {
+      float : left;
+      background-color: red;
+      width: 740px;
+      height: 428px;
+    }
+
+    .right {
+      float: right;
+      background-color: blue;
+      width: 332px;
+      height: 428px;
+    }
+
+    .footer {
+      background-color: yellow;
+      height: 80px;
+    }

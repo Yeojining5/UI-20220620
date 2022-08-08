@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="button" id="hw" value="Hello world" />
+  <script>
+    /* script 태그 안에는 자바스크립트 코드만이 존재하므로 유지보수에 유리해진다 */
+    /* id 값이 'hw'인 엘리먼트(태그)를 가져와서 'click'이 일어났을 떄 해당 함수를 가져온다 */
+    const hw = document.getElementById('hw');
+    hw.addEventListener('click', function(){
+      alert('Hello world');
+    })
+    hw.addEventListener('click', () => alert('Hello world'));
+
+    
+  </script>
+</body>
+</html>

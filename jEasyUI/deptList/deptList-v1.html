@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>부서관리 - DataGrid</title>
+  <link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+  <link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+  <link rel="stylesheet" type="text/css" href="../../demo/demo.css">
+  <script type="text/javascript" src="../../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../../js/jquery.easyui.min.js"></script>
+  <script>
+    function deptList(){
+      $('#dg-dept').datagrid({
+        url:'./dept.json',
+        method:'get',
+      });
+    }
+  </script>
+</head>
+<body>
+  <h2>Basic DataGrid</h2>
+  <p>The DataGrid is created from markup, no JavaScript code needed.</p>
+  <div style="margin:20px 0;"></div>
+  
+  <table id="dg-dept" class="easyui-datagrid" title="부서 목록" style="width:700px;height:250px"
+          data-options="toolbar:'#tb-dept', singleSelect:true,collapsible:true,url:'./dept.json',method:'get'">
+      <thead>
+          <tr>
+              <th data-options="field:'deptno',width:80">부서번호</th>
+              <th data-options="field:'dname',width:100">부서명</th>
+              <th data-options="field:'loc',width:250">지역</th>
+          </tr>
+      </thead>
+  </table>
+  <div id="tb-dept" style="padding:5px 5px">
+    <a href="javascript:deptList();" class="easyui-linkbutton" iconCls="icon-search">Seach</a>
+</body>
+</html>
+
+<!-- 
+  js폴더 - jquery.min.js파일 / jquery.esayui.min.js
+  위 파일은 몸집을 최대한 줄이기위해 띄어쓰기를 전혀하지X
+  파일의 몸집이 크면 다운받는데 시간이 오래걸리기 때문에 이렇게 한것
+-->
