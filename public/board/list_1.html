@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- ################## CSS ################## -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./board.css" />
+
+    <!-- ################## JavaScript ################## -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    
+    <!-- ################## Jquery ################## -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  
+    <!-- ############### Kakao Map API Key ############### -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5599cb1e8550656096d38d6a365519e7&libraries=services,clusterer"></script>
+  
+  </head>
+
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+    
+
+    <script>
+      // 전체레코드 갯수
+      // 이 스크립트가 아래 스크립트보다 먼저 들어와야한다
+      // 절차지향의 특징을 가지기 때문
+      class PageBar {
+        totalRecord;
+        //페이지당 레코드 수
+        numPerPage; // 10개씩이다
+
+        //블럭당 디폴트 페이지 수 - 여기서는 일단 2개로 정함.
+        pagePerBlock = 2;
+
+        //총페이지 수
+        totalPage;
+
+        //총블럭 수
+        totalBlock;
+
+        //현재 내가 바라보는 페이지 수
+        nowPage;
+
+        //현재 내가 바라보는 블럭 수
+        nowBlock;
+
+        //적용할 페이지 이름
+        pagePath;
+        pagination;
+        // 자바와는 다르게 오버로딩을 지원하지 않는다 (컨벤션)
+        constructor(numPerPage, totalRecord, nowPage, pagePath) {
+          this.numPerPage = numPerPage;
+          this.totalRecord = totalRecord;
+          //alert(totalRecord);
+          this.nowPage = nowPage;
+          this.pagePath = pagePath;
+          this.totalPage = Math.ceil(this.totalRecord / this.numPerPage); // 47.0/10=> 4.7 4.1->5page 4.2->5page
+          this.totalBlock = Math.ceil(this.totalPage / this.pagePerBlock); //5.0/2=> 2.5-> 3장
+          //현재 내가바라보는 페이지 : (int)((double)4-1/2)
+          this.nowBlock = Math.floor(this.nowPage / this.pagePerBlock);
+        }
+        //setter메소드 선언
+        setPageBar() {
+          console.log("nowBlock:" + this.nowBlock);
+          let pageLink = "";
+          //전체 레코드 수가 0보다 클때 처리하기
+          if (this.totalRecord > 0) {
+            //nowBlock이 0보다 클때 처리
+            //이전 페이지로 이동 해야 하므로 페이지 번호에 a태그를 붙여야 하고
+            //pagePath뒤에 이동할 페이지 번호를 붙여서 호출 해야함.
+            if (this.nowBlock > 0) {
+              //(1-1)*2+(2-1)=1
+              pageLink +=
+                "<a href='" +
+                this.pagePath +
+                "?nowPage=" +
+                ((this.nowBlock - 1) * this.pagePerBlock +
+                  (this.pagePerBlock - 1)) +
+                "'>";
+              pageLink += "<img border=0 src='/images/bu_a.gif'>";
+              pageLink += "</a>&nbsp;&nbsp;";
+            }
+            for (let i = 0; i < this.pagePerBlock; i++) {
+              //현재 내가 보고 있는 페이지 블록 일때와
+              if (this.nowBlock * this.pagePerBlock + i == this.nowPage) {
+                pageLink +=
+                  "<b>" +
+                  (this.nowBlock * this.pagePerBlock + i + 1) +
+                  "</b>&nbsp;";
+              }
+              //그렇지 않을 때를 나누어 처리해야 함.
+              else {
+                pageLink +=
+                  "<a href='" +
+                  this.pagePath +
+                  "?nowPage=" +
+                  (this.nowBlock * this.pagePerBlock + i) +
+                  "'>" +
+                  (this.nowBlock * this.pagePerBlock + i + 1) +
+                  "</a>&nbsp;";
+              }
+              //모든 경우에 pagePerBlock만큼 반복되지 않으므로 break처리해야 함.
+              //주의할 것.
+              if (this.nowBlock * this.pagePerBlock + i + 1 == this.totalPage)
+                break;
+            }
+            //현재 블록에서 다음 블록이 존재할 경우 이미지 추가하고 페이지 이동할 수 있도록
+            //a태그 활용하여 링크 처리하기
+            if (this.totalBlock > this.nowBlock + 1) {
+              pageLink +=
+                "&nbsp;&nbsp;<a href='" +
+                this.pagePath +
+                "?nowPage=" +
+                (this.nowBlock + 1) * this.pagePerBlock +
+                "'>";
+              pageLink += "<img border=0 src='/images/bu_b.gif'>";
+              pageLink += "</a>";
+            }
+          }
+          this.pagination = pageLink;
+        }
+        //getter메소드 선언
+        getPageBar() {
+          this.setPageBar();
+          return this.pagination;
+        }
+      } ////// end of PageBar
+    </script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCrA0QQH5QpbtWdyVbrQB72APSQxH3cjl4",
+        authDomain: "semi-intelligym.firebaseapp.com",
+        databaseURL: "https://semi-intelligym-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "semi-intelligym",
+        storageBucket: "semi-intelligym.appspot.com",
+        messagingSenderId: "925436106266",
+        appId: "1:925436106266:web:5e064d6b621ccb9dfd63a3"
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script>
+      // Database에서 데이터 가져오기
+      const db = firebase.firestore()
+
+      /* ***** 페이징 처리에 필요한 변수 선언 ***** */
+      let num = 0; // 페이지 순번을 잡는 변수
+      let size = 0; // 페이지 사이즈
+      let total = 0; // 전체 레코드 수
+      let numPerPage = 2; // 한 페이지에 몇개씩 뿌릴건가
+      let nowPage = 0; // 현재 내가 바라보는 페이지
+
+      let params = new URLSearchParams(document.location.search);
+      nowPage = params.get("nowPage");
+      /* ***************************************** */
+
+
+      db.collection("board")
+        .get()
+        .then((snapshot) => { // 콜백영역 - callback함수
+          snapshot.forEach((item) => {
+            //console.log(doc.data());
+            // 코드양은 늘어나더라도(DOM Tree구조는 잘 보임) 복잡도 증가하지 않도록
+            const template = `
+                              <tr>
+                                <th scope="row">${++num}</th>
+                                <td><a href="./read.html?id=${
+                                  item.id
+                                }" class="btn btn-primary" data-bs-toggle="modal">${
+              item.data().제목
+            }</a></td>
+                                <td>${item.data().작성자}</td>
+                                <td>${item.data().작성일}</td>
+                              </tr>            
+            `
+            $(".board-content").append(template)
+          })
+        })
+
+    </script>
+
+
+
+
+    <div class="container mt-5">
+      <!-- page header -->
+      <div class="page-header">
+        <h2>공지사항</h2>
+        <hr />
+      </div>
+      <div class="row">
+        <div class="col-3">
+          <select
+            class="form-select"
+            aria-label="분류선택"
+            name="gubun"
+            id="gubun"
+          >
+            <option defaultValue>분류선택</option>
+            <option value="b_title">제목</option>
+            <option value="b_writer">작성자</option>
+            <option value="b_content">내용</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <input type="text" name="keyword" id="keyword" class="form-control" />
+        </div>
+        <div class="col-3">
+          <button class="btn btn-danger">검색</button>
+        </div>
+      </div>
+      <!-- page header -->
+      <div class="board-list mt-3">
+        <table class="table table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성자</th>
+              <th scope="col">작성일</th>
+            </tr>
+          </thead>
+          <tbody class="board-content"></tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- 모달창 화면 추가 -->
+​
+    <!-- 모달창 화면 추가 -->
+  </body>
+</html>

@@ -1,0 +1,15 @@
+body {
+  border-color: lightgrey;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+.modal-title{
+  color: #fff;
+  background-color: #198754;
+  margin: 4px;
+  padding: 6px 12px;
+}
