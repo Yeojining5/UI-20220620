@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+    <!-- ################## CSS ################## -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <!-- ################## Jquery ################## -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- ################## fontawesome ################## -->
+    <script src="https://kit.fontawesome.com/fd76fe00bf.js" crossorigin="anonymous"></script>
+
+<style>
+
+.detail-pic {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+} 
+
+</style>
+
+</head>
+
+
+
+<body>
+
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
+  
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrA0QQH5QpbtWdyVbrQB72APSQxH3cjl4",
+      authDomain: "semi-intelligym.firebaseapp.com",
+      databaseURL: "https://semi-intelligym-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "semi-intelligym",
+      storageBucket: "semi-intelligym.appspot.com",
+      messagingSenderId: "925436106266",
+      appId: "1:925436106266:web:5e064d6b621ccb9dfd63a3"
+    };
+    firebase.initializeApp(firebaseConfig);
+  </script>
+
+
+
+
+  <script>
+
+    const db = firebase.firestore();
+    const storage = firebase.storage(); 
+    
+
+/* <h5 class="title"><a href="/detail.html?id=${doc.id}">${doc.data().제목}</a></h5>  */
+/* 위 코드에서 id= 이런식으로 index.html에 쿼리스트링 사용하여 id를 숨겨둿음 */
+/* index.html 에서 사진옆 타이틀을 누르면 그 데이터를 가진 상세페이지로 넘어감 */
+    const 쿼리스트링 = new URLSearchParams(window.location.search);
+    
+    db.collection('product').doc(쿼리스트링.get('id')).get().then((result)=>{
+      console.log(result.data());
+      const template = `
+                        <div class="detail-pic my-4" style="background-image: url('${result.data().이미지}');"></div>
+                        <div>
+                          <h5>올린사람 : 모름</h5>
+                          <hr>
+                          <h5 class="title">${result.data().제목}</h5>
+                          <p class="date">올린날짜</p>
+                          <p class="price">${result.data().가격}</p>
+                        </div>
+                      `;
+      
+      $('.container').append(template);
+    })
+    
+
+  </script>  
+  
+
+  <div class="container">
+    <!-- firebase here -->
+  </div>
+
+
+
+    <!-- ################## JavaScript ################## -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+</body>
+</html>

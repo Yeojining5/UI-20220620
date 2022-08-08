@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .alert-box {
+      background: #9292e3;
+      color: black;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+
+<!-- ################## Jquery ################## -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+  
+  <div class="alert-box" id="alert">
+    <span id="title">Alert 박스</span>
+    <button id="close"> X </button>
+  </div>
+
+  <h4 id="test">안녕하세요</h4>
+
+  <button onclick="알림창1열기('아이디입력해라')">버튼1</button>
+  <button onclick="알림창1열기('비번입력해라')">버튼2</button>
+
+  <script>
+
+    //document.getElementById('test').innerHTML = ''
+    $('#test').html('안녕'); // 안에있는 모든 html
+    //$('#test').text('안녕'); // 안에있는 모든 글자
+    $('#test').css('color', 'red');
+
+
+  </script>
+
+</body>
+</html>

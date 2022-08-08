@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .alert-box {
+      background: #9292e3;
+      color: black;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+
+</head>
+<body>
+  
+  <div class="alert-box" id="alert">
+    <span id="title">Alert 박스</span>
+    <button id="close"> X </button>
+  </div>
+
+  <button onclick="알림창1열기('아이디입력해라')">버튼1</button>
+  <button onclick="알림창1열기('비번입력해라')">버튼2</button>
+
+  <script>
+    // 버튼 클릭 이벤트 2가지 만들기 (html을 굳이 여러개 만들 필요 없다!)
+    // 1. div 태그 안에 내용 'Alert 박스' 변경
+    // 2. 알림창 열기
+
+    // 베이직 버전에서 -> 구멍뚫기 문법으로 
+    // (반복되는 코드에서 가변적인 부분을 파라미터로 사용)
+    function 알림창1열기(구멍) {
+      //1. 제목바꾸기
+      document.getElementById('title').innerHTML = 구멍;
+      
+      //2. 열기
+      document.getElementById('alert').style.display = 'block';
+    }
+
+    // function 알림창2열기() {
+    //   //1. 제목바꾸기
+    //   document.getElementById('title').innerHTML = '비밀번호 입력하세요';
+      
+    //   //2. 열기
+    //   document.getElementById('alert').style.display = 'block';
+    // }
+
+    function 알림창닫기() {
+      document.getElementById('alert').style.display = 'none';
+    }
+
+  </script>
+
+</body>
+</html>
