@@ -26,6 +26,19 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-storage.js"></script>
     
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCrA0QQH5QpbtWdyVbrQB72APSQxH3cjl4",
+        authDomain: "semi-intelligym.firebaseapp.com",
+        databaseURL: "https://semi-intelligym-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "semi-intelligym",
+        storageBucket: "semi-intelligym.appspot.com",
+        messagingSenderId: "925436106266",
+        appId: "1:925436106266:web:5e064d6b621ccb9dfd63a3"
+      };
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
 
     <script>
       // 전체레코드 갯수
@@ -68,8 +81,8 @@
         }
         //setter메소드 선언
         setPageBar() {
-          console.log("nowBlock:" + this.nowBlock);
-          let pageLink = "";
+          console.log("nowBlock:" + this.nowBlock)
+          let pageLink = ""
           //전체 레코드 수가 0보다 클때 처리하기
           if (this.totalRecord > 0) {
             //nowBlock이 0보다 클때 처리
@@ -83,9 +96,9 @@
                 "?nowPage=" +
                 ((this.nowBlock - 1) * this.pagePerBlock +
                   (this.pagePerBlock - 1)) +
-                "'>";
-              pageLink += "<img border=0 src='../service/images/bu_a.gif'>";
-              pageLink += "</a>&nbsp;&nbsp;";
+                "'>"
+              pageLink += "<img border=0 src='../service/images/bu_a.gif'>"
+              pageLink += "</a>&nbsp;&nbsp;"
             }
             for (let i = 0; i < this.pagePerBlock; i++) {
               //현재 내가 보고 있는 페이지 블록 일때와
@@ -93,7 +106,7 @@
                 pageLink +=
                   "<b>" +
                   (this.nowBlock * this.pagePerBlock + i + 1) +
-                  "</b>&nbsp;";
+                  "</b>&nbsp;"
               }
               //그렇지 않을 때를 나누어 처리해야 함.
               else {
@@ -104,12 +117,12 @@
                   (this.nowBlock * this.pagePerBlock + i) +
                   "'>" +
                   (this.nowBlock * this.pagePerBlock + i + 1) +
-                  "</a>&nbsp;";
+                  "</a>&nbsp;"
               }
               //모든 경우에 pagePerBlock만큼 반복되지 않으므로 break처리해야 함.
               //주의할 것.
               if (this.nowBlock * this.pagePerBlock + i + 1 == this.totalPage)
-                break;
+                break
             }
             //현재 블록에서 다음 블록이 존재할 경우 이미지 추가하고 페이지 이동할 수 있도록
             //a태그 활용하여 링크 처리하기
@@ -119,33 +132,21 @@
                 this.pagePath +
                 "?nowPage=" +
                 (this.nowBlock + 1) * this.pagePerBlock +
-                "'>";
-              pageLink += "<img border=0 src='../service/images/bu_b.gif'>";
-              pageLink += "</a>";
+                "'>"
+              pageLink += "<img border=0 src='../service/images/bu_b.gif'>"
+              pageLink += "</a>"
             }
           }
-          this.pagination = pageLink;
+          this.pagination = pageLink
         }
         //getter메소드 선언
         getPageBar() {
-          this.setPageBar();
-          return this.pagination;
+          this.setPageBar()
+          return this.pagination
         }
-      } ////// end of PageBar
+      } //end of PageBar
     </script>
 
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyCrA0QQH5QpbtWdyVbrQB72APSQxH3cjl4",
-        authDomain: "semi-intelligym.firebaseapp.com",
-        databaseURL: "https://semi-intelligym-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "semi-intelligym",
-        storageBucket: "semi-intelligym.appspot.com",
-        messagingSenderId: "925436106266",
-        appId: "1:925436106266:web:5e064d6b621ccb9dfd63a3"
-      };
-      firebase.initializeApp(firebaseConfig);
-    </script>
 
     <script>
       // Database에서 데이터 가져오기

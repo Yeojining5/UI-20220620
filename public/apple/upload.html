@@ -9,7 +9,6 @@
 
     <!-- ################## CSS ################## -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="sidebar.css">
 
     <!-- ################## Jquery ################## -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -42,130 +41,53 @@
     firebase.initializeApp(firebaseConfig);
   </script>
 
-
-    
-
-  <!-- ################## Header Start ##################-->
-  <header class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <!-- navbar Start -->
+    <!-- ################## navbar Start ##################-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">IntelliGym</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                About
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">회사 소개</a></li>
-                <li><a class="dropdown-item" href="#">센터 소개</a></li>
-                <li><a class="dropdown-item" href="#">강사 소개</a></li>
-                <li><a class="dropdown-item" href="#">오시는 길</a></li>
-              </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Program
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
               </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Personal Training</a></li>
-                <li><a class="dropdown-item" href="#">Group Exercise</a></li>
-                <li><a class="dropdown-item" href="#">Pilates</a></li>
-                <li><a class="dropdown-item" href="#">Golf Academy</a></li>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
               </ul>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Membership
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">회원권 안내</a></li>
-                <li><a class="dropdown-item" href="#">상담 신청</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Community
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">1:1 문의</a></li>
-                <li><a class="dropdown-item" href="#">공지사항(FAQ)</a></li>
-                <li><a class="dropdown-item" href="#">제휴 문의</a></li>
-              </ul>
+            <li class="nav-item">
+              <a class="nav-link disabled">Disabled</a>
             </li>
           </ul>
+          <span class="mx-5 fw-semibold" id="userName"></span>
         </div>
       </div>
+    </nav>
+    <!-- ################## navbar End ##################-->
+
+    <div class="container mt-3">
+      <div class="container mt-3">
+        <input type="text" class="form-control mt-2" id="title" placeholder="title">
+        <textarea class="form-control mt-2" id="content">content</textarea>
+        <input type="text" class="form-control mt-2" id="price" placeholder="price">
+        <input class="form-control mt-2" type="file" id="image">
+        <button class="btn btn-danger mt-3" id="send">올리기</button>
+      </div>
+    </div>
+
     
-    <!-- navbar End -->
-  </header>
-  <!-- ################## Header End ##################-->
-
-
-
-
-  <div class="container-fluid"> <!-- container-fluid 뷰포트 100% -->
-
-    <div class="row"> <!-- col-lg-3:9 / 반응형 sm크기 시 사이드바 사라지게 -->
-      <!-- ################## Side bar start ##################-->
-      <nav class="col-lg-2 d-none d-lg-block sidebar">
-        <div class="d-flex gap-5 justify-content-center">
-          <ul class="list-group list-group-flush">
-            <p class="display-5 fw-bold">My page</p>
-            <li class="list-group-item">
-              <i id="icon" class="fa-solid fa-person-walking"></i>
-              <a href="#" class="dot active">나의 운동일지</a>
-            </li>
-            <li class="list-group-item">
-              <i id="icon" class="fa-solid fa-comment-dots"></i>
-              <a href="#" class="dot">나의 문의</a>
-            </li>
-            <li class="list-group-item">
-              <i  id="icon" class="fa-solid fa-file-pen"></i>
-              <a href="#" class="dot">나의 수강</a>
-            </li>
-            <li class="list-group-item">
-              <i id="icon" class="fa-solid fa-circle-info"></i>
-              <a href="#" class="dot">나의 정보</a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 프로필사진 -->
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://cdn.dailyimpact.co.kr/news/photo/202007/61265_32154_1316.jpg" alt="" width="72" height="72" class="rounded-circle me-2">
-            <span>강동원님</span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-        </div>
-      </nav>
-      <!-- ################## Side bar End ##################-->
-
-
-      <!-- ################## main start ##################-->
-      <main class="col-lg-10 col-sm-12">
-        <div class="container mt-3">
-          <div class="container mt-3">
-            <input type="text" class="form-control mt-2" id="title" placeholder="title">
-            <textarea class="form-control mt-2" id="content">content</textarea>
-            <input type="text" class="form-control mt-2" id="price" placeholder="price">
-            <input class="form-control mt-2" type="file" id="image">
-            <button class="btn btn-danger mt-3" id="send">올리기</button>
-          </div>
-        </div>
-      </main> <!-- ################## Main End ##################-->   
-      
-    </div> <!-- end of div.row -->
-  </div> <!-- end of div.container -->
-    
-
   <script>
 
     const db = firebase.firestore();
@@ -202,12 +124,14 @@
               가격 : $('#price').val(),
               내용 : $('#content').val(),
               날짜 : new Date(),
-              이미지 : url
+              이미지 : url,
+              uid : JSON.parse(localStorage.getItem('user')).uid, // 로컬스토리지에서 뽑아오기 
+              이름 : JSON.parse(localStorage.getItem('user')).displayName
             }
             // then은 성공했을 때, catch는 실패했을 때
             db.collection('product').add(저장할거).then((result)=>{
               console.log(result);
-              window.location.href = "/index.html";
+              window.location.href = "./index.html";
             }).catch((err)=>{
               console.log(err);
             })
@@ -222,15 +146,8 @@
 
 
 
-  <!-- ################## Footer Start ##################-->
-  <footer>
-    
-  </footer>
-  <!-- ################## Footer End ##################-->
-
-
     <!-- ################## JavaScript ################## -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+    <script src="./index.js"></script>
 </body>
 </html>

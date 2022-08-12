@@ -9,7 +9,6 @@
 
     <!-- ################## CSS ################## -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="sidebar.css">
 
     <!-- ################## Jquery ################## -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -42,68 +41,41 @@
     firebase.initializeApp(firebaseConfig);
   </script>
 
-
-    
-
-  <!-- ################## Header Start ##################-->
-  <header class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-    <!-- navbar Start -->
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">IntelliGym</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                About
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">회사 소개</a></li>
-                <li><a class="dropdown-item" href="#">센터 소개</a></li>
-                <li><a class="dropdown-item" href="#">강사 소개</a></li>
-                <li><a class="dropdown-item" href="#">오시는 길</a></li>
+        <!-- ################## navbar Start ##################-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled">Disabled</a>
+                </li>
               </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Program
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Personal Training</a></li>
-                <li><a class="dropdown-item" href="#">Group Exercise</a></li>
-                <li><a class="dropdown-item" href="#">Pilates</a></li>
-                <li><a class="dropdown-item" href="#">Golf Academy</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Membership
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">회원권 안내</a></li>
-                <li><a class="dropdown-item" href="#">상담 신청</a></li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Community
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">1:1 문의</a></li>
-                <li><a class="dropdown-item" href="#">공지사항(FAQ)</a></li>
-                <li><a class="dropdown-item" href="#">제휴 문의</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    
-    <!-- navbar End -->
-  </header>
-  <!-- ################## Header End ##################-->
-
+              <span class="mx-5 fw-semibold" id="userName"></span>
+            </div>
+          </div>
+        </nav>
+        <!-- ################## navbar End ##################-->
 
       <div class="container mt-3">
         <div class="mb-3">
@@ -131,60 +103,61 @@
         <button type="submit" class="btn btn-primary" id="logout">로그아웃</button>
       </div>
       
-    
+      <script>
 
-  <script>
-
-    const db = firebase.firestore();
-    const storage = firebase.storage(); 
-    
-    // 로그인
-    $('#login').click(function(){
-      const 이메일 = $('#email').val();
-      const 패스워드 = $('#pw').val();
-
-      firebase.auth().signInWithEmailAndPassword(이메일, 패스워드).then((result)=>{
-        console.log(result.user);
-        window.location.href = "/upload.html";
-      })
-    })
-
-    // 로그아웃
-    $('#login').click(function(){
-      firebase.auth().signOut()
-    })
-
-
-    $('#register').click(function(){
-
-      // 사용자가 input에 입력한 값 가져오기
-      const 이메일 = $('#email-new').val(); // 입력한 값은 val()!!
-      const 패스워드 = $('#pw-new').val();
-      const 이름 = $('#name-new').val();
-
-      firebase.auth().createUserWithEmailAndPassword(이메일, 패스워드).then((result)=>{
-        // 가입 성공 시
-        console.log(result);
-        console.log(result.user);
-        // 가입기능 업그레이드 : 이름 저장하기 (위에 선언한 변수 '이름')
-        result.user.updateProfile({diplayName : 이름})
-
+        const db = firebase.firestore();
+        const storage = firebase.storage(); 
         
-      })
-    })
-
     
+        // 회원 가입
+        $('#register').click(function(){
+    
+        // 사용자가 input에 입력한 값 가져오기
+        const 이메일 = $('#email-new').val(); // 입력한 값은 val()!!
+        const 패스워드 = $('#pw-new').val();
+        const 이름 = $('#name-new').val();
+    
+        firebase.auth().createUserWithEmailAndPassword(이메일, 패스워드).then((result)=>{
+          // 가입 완료되면 user 컬렉션에 문서 생성하기. 문서id는 유저 uid로, 내용은 이름&이메일
+          // add 함수 사용 시 자동으로 문서 아이디가 발급되므로 -> 대신 doc을 사용하기
+          let 유저정보 = {
+            name : 이름,
+            email : 이메일
+          }
+          db.collection('user').doc(result.user.uid).set({유저정보})
 
-
-  </script>  
+          // 가입 성공 시
+          console.log(result);
+          console.log(result.user);
+          // 가입기능 업그레이드 : 이름 저장하기 (위에 선언한 변수 '이름')
+          result.user.updateProfile( {displayName : 이름} )
+    
+          })
+        })
+    
+        // 로그인
+        $('#login').click(function(){
+          const 이메일 = $('#email').val();
+          const 패스워드 = $('#pw').val();
+    
+          firebase.auth().signInWithEmailAndPassword(이메일, 패스워드).then((result)=>{
+            console.log(result.user);
+            window.location.href = "./upload.html";
+          })
+        })
+    
+        // 로그아웃
+        $('#logout').click(function(){
+          firebase.auth().signOut()
+          localStorage.removeItem('user') //로컬스토리지에서 로그인 정보 삭제
+        })
+    
+    
+      </script>
   
-
-
-
-
 
     <!-- ################## JavaScript ################## -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-
+    <script src="./index.js"></script>
 </body>
 </html>

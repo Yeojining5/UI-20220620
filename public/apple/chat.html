@@ -18,12 +18,28 @@
 
 <style>
 
-.detail-pic {
-  width: 100%;
-  height: 300px;
-  background-size: cover;
-  background-position: center;
-} 
+  .chat-content {
+    height: 450px;
+    overflow-y: scroll;
+    padding: 10px;
+  }
+  .chat-content li {
+    margin-top: 10px;
+  }
+  .text-small {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 0;
+  }
+  .chat-box {
+    background: #eee;
+    padding: 5px;
+    border-radius: 5px;
+    float: left;
+  }
+  .mine {
+    float: right;
+  }
 
 </style>
 
@@ -89,68 +105,101 @@
       </nav>
       <!-- ################## navbar End ##################-->
 
-  <div class="container">
-    
-    <div class="detail-pic my-4" style="background-image: url
-    ('https://placeimg.com/640/380/tech');"></div>
-      <div>
-        <h5 class="author">올린사람 : 모름</h5>
-        <hr>
-        <h5 class="title">지금 url에 기록된 id를 가진 게시물의 상품명</h5>
-        <p class="date">올린날짜</p>
-        <p class="price">지금 url에 기록된 id를 가진 게시물의 가격</p>
-        <button class="btn btn-primary" id="edit">수정하기</button>
-        <button class="btn btn-primary" id="chat">채팅하기</button>
-      </div>
-  </div>
+      <div class="container p-4 detail">
+        <div class="row">
+          <div class="col-3 p-0">
+            <ul class="list-group chat-list">
+              <!-- firebase here -->
+            </ul>
+          </div>
+          <div class="col-9 p-0">
+            <div class="chat-room">
+              <ul class="list-group chat-content">
+                <!-- firebase here -->
+              </ul>
+              <div class="input-group">
+                <input class="form-control" id="chat-input">
+                <button class="btn btn-secondary" id="send">전송</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
 
   <script>
 
     const db = firebase.firestore();
-    const storage = firebase.storage(); 
-    
+    const storage = firebase.storage();
+    let 내uid = JSON.parse( localStorage.getItem('user') ).uid;
+    let 채팅방id; // 미리 밖에 선언해 두기
 
-/* <h5 class="title"><a href="/detail.html?id=${doc.id}">${doc.data().제목}</a></h5>  */
-/* 위 코드에서 id= 이런식으로 index.html에 쿼리스트링 사용하여 id를 숨겨둿음 */
-/* index.html 에서 사진옆 타이틀을 누르면 그 데이터를 가진 상세페이지로 넘어감 */
-    const 쿼리스트링 = new URLSearchParams(window.location.search);
-    let 판매자uid; // 채팅기능 구현 시 필요한 데이터이므로 전역변수 처리
-    let 상품명;
+    // where() query로 원하는 document만 가져오기 / where('필드','연산자','값')
+    // where('product','==','고구마!')
+    // where('product', 'in', ['고구마', '돼지감자'])
+    // array에서 찾고싶으면 array-contains 사용
+    db.collection('chatroom').where('who','array-contains',내uid).get().then((result)=>{
+      // DB에서 여러개 가져왔을 때 forEach 붙임 / a는 작명
+      result.forEach((a)=>{
+        console.log(a.data());
+        const template = `
+              <li class="list-group-item">
+                <h6>${a.data().product}</h6>
+                <h6 class="text-small">${a.id}</h6>
+              </li>
+        `;
+        $('.chat-list').append(template);
 
-    db.collection('product').doc(쿼리스트링.get('id')).get().then((result)=>{
-      console.log(result.data())
-      판매자uid = result.data().uid;
-      상품명 = result.data().제목;
-      $('.author').html('올린사람 : '+result.data().이름)
-      $('.title').html(result.data().제목)
-      $('.price').html(result.data().가격)
-      $('.detail-pic').css('background-image', `url(${result.data().이미지})`)
-    })
+        // 위에 DB에서 가져온 리스트를 누르면 그 안에 있는 채팅방아이디 가져오기
+        // db.collection('chatroom').doc('고구마채팅방id').collection('messages').add(데이터)
+        // 위 '고구마채팅방id' 에 가져온 데이터를 넣어야함
+        $('.list-group-item').click(function(e){
+          // this는 현재 누른 요소
+          // text() 그 글자를 가져와라
+          console.log(a.data().product+"=="+a.id);
+          채팅방id = $(this).children('.text-small').text()  // null값이었던 전역변수가 여기서 초기화됨
+          
+          e.stopImmediatePropagation(); // 이벤트 버블링 현상 방지 (상위요소까지 여러번 출력됨)
+          
 
-    // '수정' 버튼을 누르면 edit.html 파일로 이동 (감자 게시물을 누르면 감자id를 가진 url로 이동)
-    $('#edit').click(function(){
-      window.location.href = './edit.html?id=' + 쿼리스트링.get('id') // 위에서 가져오기
-    })
+/////////실시간 변동사항 반영////////// db에서 가져올때 get().then() 대신 -> onSnapshot()사용! 
+          db.collection('chatroom').doc(채팅방id).collection('messages').orderBy('date').
+          onSnapshot((result)=>{
+            $('.chat-content').html('') // 비워주세요
+            result.forEach((a)=>{
+              console.log(a.data());
+              if(내uid == a.uid) {
+                const template = `
+                      <li><span class="chat-box mine">${a.data().content}</span></li>
+                      `;
+                $('.chat-content').append(template);
+              } else {
+                const template = `
+                      <li><span class="chat-box">${a.data().content}</span></li>
+                      `;
+                $('.chat-content').append(template);
+              }
+              
+            })
+          })
+        })
 
-    // '채팅하기' 버튼 눌렀을 때
-    let 내uid = JSON.parse(localStorage.getItem('user')).uid // 로컬스토리지에서 uid 가져오기
-
-      $('#chat').click(function() {
-        let 데이터 = {
-          //from : 내uid,
-          //to : 판매자uid,
-          who : [내uid, 판매자uid],  // 권장방식 [참여자1uid, 참여자2uid]
-          product : 상품명,
-          date : new Date()
-        }
-
-        db.collection('chatroom').add(데이터).then((result)=>{
-                console.log(result);
-                
-              }).catch((err)=>{
-                console.log(err);
-              })
       })
+    })
+
+    // 메세지 저장하기 (쿼리스트링과 문법 비슷)
+    $('#send').click(function(){
+
+      let 데이터 = {
+        content : $('#chat-input').val(),
+        date : new Date(),
+        uid : 내uid
+      }
+
+      //db.collection('chatroom').doc('고구마채팅방id').collection('messages').add(데이터)
+      db.collection('chatroom').doc(채팅방id).collection('messages').add(데이터)
+
+    })
+
 
   </script>  
 
