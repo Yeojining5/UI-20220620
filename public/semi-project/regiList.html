@@ -26,56 +26,7 @@
         <script src="https://kit.fontawesome.com/fd76fe00bf.js" crossorigin="anonymous"></script>
 
     <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-
-      .b-example-divider {
-        height: 3rem;
-        background-color: rgba(0, 0, 0, .1);
-        border: solid rgba(0, 0, 0, .15);
-        border-width: 1px 0;
-        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-      }
-
-      .b-example-vr {
-        flex-shrink: 0;
-        width: 1.5rem;
-        height: 100vh;
-      }
-
-      .bi {
-        vertical-align: -.125em;
-        fill: currentColor;
-      }
-
-      .nav-scroller {
-        position: relative;
-        z-index: 2;
-        height: 2.75rem;
-        overflow-y: hidden;
-      }
-
-      .nav-scroller .nav {
-        display: flex;
-        flex-wrap: nowrap;
-        padding-bottom: 1rem;
-        margin-top: -1px;
-        overflow-x: auto;
-        text-align: center;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
-      }
 
       .card:hover {
         border : 3px solid #03a9f4;
@@ -114,6 +65,7 @@
       let myuid = $.cookie('c_uid')
       let clickId;
 
+
       //////////////////// onSnapshot() 실시간 업데이트 가져오기 ////////////////////
       db.collection('myclass').where('UID', '==', myuid).onSnapshot((result)=>{
         $('.list-container').html('');
@@ -121,13 +73,20 @@
             console.log(a.data());
             const template = `
               <div class="card mb-3 mt-3 active">
-                <h5 class="card-header fs-6">${a.id}</h5>
+                <div class="card-id" style="display : none;">${a.id}</div>
+                <h5 class="card-header fs-6">
+                  <i class="fa-regular fa-calendar-check"></i> ${a.data().신청일자}
+                </h5>
+
                 <div class="card-body">
-                  <h5 class="card-title fw-bold">${a.data().강의명}</h5>
+                  <h5 class="card-title fw-bold">
+                    ${a.data().강의명}
+                  </h5>
                   <p class="card-text fs-6 fw-semibold">
                     ${a.data().강의번호} | 강사명 : ${a.data().강사명} | 강의시간 : ${a.data().강의시간} (50분)
-                  </p>
+                    </p>
                 </div>
+
               </div>
           `;
           $('.list-container').append(template);
@@ -139,7 +98,7 @@
               
               // clickId는 전역변수로 빼야 사용가능!!
               // a.id 값을 clickId에 담기
-              clickId = $(this).find('.card-header').text()
+              clickId = $(this).find('.card-id').text()
               console.log(clickId);
               
               $('.card').css("border","") // 나머지는 bordr 스타일X
@@ -200,7 +159,8 @@
           }
         }
       })
-        
+
+      
     </script>
 
 
@@ -320,7 +280,7 @@
       </div> <!-- end of div.row -->
     </div> <!-- end of div.container -->
 
-      
 
+    
   </body>
 </html>
