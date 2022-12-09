@@ -95,13 +95,14 @@
             num = i;
             classNum = snapshot.docs[i].data().강의번호;
 
-            //////////////////////수강신청한 컬렉션의 강의번호와 for문으로 출력된 강의번호 쿼리 //////////////////////////////////
+            ////////////////////// 수강신청한 컬렉션의 강의번호와 for문으로 출력된 강의번호 쿼리 ////////////////////
             db.collection("myclass")
               .where("강의번호", "==", classNum)
               .get()
               .then((querySnapshot) => {
                 applyTotal = querySnapshot.size;
-                //console.log(snapshot.docs[i].data().강의번호 + " : " + applyTotal);
+                //console.log(snapshot.docs[i].data().강의번호 + "신청인원  : " + applyTotal);
+                //console.log(snapshot.docs[i].data());
 
                 const template = `
                   <tr>
@@ -121,8 +122,7 @@
             `;
                 
                 $(".class-content").append(template);
-              });
-            ////////////////////////////////////////////////////쿼리끝//////////////////////////////////////////
+              });////////////////////////////////////////////////////쿼리끝////////
           } ////////////////////////////////////// end of for
         }); /////////////////// end of callback (center_gangnam 수강신청 리스트 가져오기)
 

@@ -90,16 +90,11 @@
         return curtime;
       };
 
-      function addClass() {
-        alert("수강신청이 완료되었습니다! 수강내역에서 확인해 주세요.");
-      }
-
-      /* ############################# [View] ############################# */
 
       $(document).ready(function () {
         let queryString = new URLSearchParams(document.location.search);
-        let id = queryString.get("id"); // 문자열 "Jonathan"
-        console.log("사용자가 선택한 item.id : " + id);
+        let id = queryString.get("id"); 
+        console.log("사용자가 선택한 item.id : " + id); // 아쉬탕가요가(화요일)_2
 
           db.collection("center_gangnam")
             .doc(id)
@@ -112,14 +107,12 @@
               teacher = result.data().강사명;
               classtime = result.data().강의시간;
               classtype = result.data().강의분류;
-              $(".img-thumbnail").attr("src", classimage);
-              $(".classname").attr("value", classname);
+              $(".img-thumbnail").attr("src", classimage); // img태그 src 속성에 'classimage'값 추가
+              $(".classname").attr("value", classname); // input태그 value 속성에 'classname'값 추가
               $(".classnum").attr("value", classnum);
               $(".teacher").attr("value", teacher);
               $(".classtime").attr("value", classtime);
             });
-
-        /* ############################# [View] ############################# */
 
         db.collection("user")
           .doc(myuid)
@@ -152,8 +145,8 @@
             .add(data)
             .then((result) => {
               console.log(result);
-              addClass();
-              window.location.href = "./register.html"; // 수강내역 페이지로 이동
+              alert("수강신청이 완료되었습니다! 수강내역에서 확인해 주세요.");
+              window.location.href = "./register.html"; // 수강신청 페이지로 이동
             })
             .catch((err) => {
               console.log(err);
@@ -379,7 +372,7 @@
     </nav>
     <!-- ########################## end of side bar ######################################### -->
 
-    <main class="col-md-3 col-lg-4 ms-sm-auto" id="main">
+    <main class="col-md-4 col-lg-5 ms-sm-auto" id="main">
 
       <div class="title_container">
         <h2 class="fw-bold">&nbsp;수강신청 상세보기</h2>
@@ -433,7 +426,7 @@
       </div>
     </main>
 
-    <article class="col-md-6 col-lg-6 d-md-block">
+    <article class="col-md-5 col-lg-5 d-md-block">
       <div class="d-flex justify-content-left" id="img_container">
         <img src="" class="img-thumbnail" alt="regiImg" style="width: 580px;" />
       </div>
